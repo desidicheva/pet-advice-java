@@ -1,27 +1,23 @@
 import javax.swing.JOptionPane;
-/* P E T   A D V I C E  
-AUTHOR: 	R Grant
-DATE CREATED: 1/99
-PURPOSE: 	Determine an appropriate pet for someone based on the type of 
-			dwelling where they live and the number of hours
-			per day they are at home. 
-			This solution demonstrates the 'if' and 'switch' statements. 
-ARGUMENTS: None
+/* 
+PROJECT:Pet Advice
+PURPOSE:Determine an appropriate pet for someone based on the type of  dwelling where they live and the number of hoursper day they are at home. 
+
 */
 public class PetAdvice
 {
 	public static void main(String [] args)
 	{
-		int dwellingType;// user input indicating  apt (1), house (2), dorm (3)
-		int hrsAtHome;	// user input; hours this person stays at home per day:
+		int dwellingType;// user input apt (1), house (2), dorm (3)
+		int hrsAtHome;	// user input for hours at home per day
 		char userContinue = 'n';
 		String userResponse = "n";
 		
 		do
 		{
-			dwellingType = determineDwellingType();// determine if user lives in  apt, house, or dorm
-			hrsAtHome = determineHrsAtHome ();// determine number of hrs person is home/day
-			// determine and print recommended pet
+			dwellingType = getDwellingType();// method for dweeling type
+			hrsAtHome = getHrsAtHome ();// method for dwelling hours at hrsAtHome
+			// method for recommendeding a pet
 			determinePet(dwellingType, hrsAtHome);	
 			userResponse = JOptionPane.showInputDialog(null,
 					"Enter Y to continue; anything else to stop.",
@@ -31,28 +27,23 @@ public class PetAdvice
 		} while (userContinue == 'Y' || userContinue == 'y');
 	}
 /* 
-	AUTHOR: 		R Grant
-	DATE CREATED: 	1/99
-	PURPOSE: 		Prompt user for valid values to indicate type of dwelling. Read and edit user
-					input. If input is valid, return the input to calling method. If input is invalid,
-					display a message and end the application.
-	ARGUMENTS: 		None
-	RETURN: 		int representing the type of dwelling; 1 - apartment; 2 - house; 3 - dorm
+
+	PURPOSE: Prompt user for valid values: 1 - apartment; 2 - house; 3 - dorm
 */	
-	public static int determineDwellingType()
+	public static int getDwellingType()
 	{
-		int  intDwellingType; // variable to store user input after converted to int
+		int  intDwellingType; // variable for dwelling type input
 		String strDwellingType;
 		do
 		{
 			// print menu via dialog box and get user response
-			strDwellingType = JOptionPane.showInputDialog(null, "Enter 1 (apartment), 2 (house), or 3 (dorm).",
+			strDwellingType = JOptionPane.showInputDialog(null, "Enter 1 for apartment, 2 foe house, or 3 for dorm.",
 					"Dwelling Type", JOptionPane.QUESTION_MESSAGE);
 			intDwellingType = Integer.parseInt(strDwellingType);
 			if (intDwellingType < 1 || intDwellingType > 3)
 			{
 				JOptionPane.showMessageDialog(null, 
-					"The value for dwelling type must be 1 (apartment), 2 (house), or 3 (dorm)",
+					"The value for dwelling type must be 1 for apartment, 2 foe house, or 3 for dorm",
 					"Dwelling Type Error", 
 					JOptionPane.ERROR_MESSAGE);
 			}
@@ -60,30 +51,25 @@ public class PetAdvice
 		return intDwellingType;
 	}
 /* 
-	AUTHOR: 		R Grant
-	DATE CREATED: 	1/99
-	PURPOSE: 		Prompt user for valid  hours spent at home each day. 
-					Read and edit user input. If input is valid, return the input to calling method. 
-					If input is invalid, display a message and end the application.
-	ARGUMENTS: 		None
-	RETURN: 		int representing number of hours spent per day at home.
+	PURPOSE: Prompt user for hours spent at home each day. Read user iput and displays a message.
+
 */	
-	public static int determineHrsAtHome()
+	public static int getHrsAtHome()
 	{
-		int hrsAtHome;	// user input indicating number of hours spent at
-					    // home per day
+		int hrsAtHome;	// variable for number of hours spent at home
+					    
 		String strHoursAtHome;
 		
 		do
 		{
-			// print menu via dialog box and get user response
-			strHoursAtHome = JOptionPane.showInputDialog(null, "Enter the number of hours per week you are home.",
+		
+			strHoursAtHome = JOptionPane.showInputDialog(null, "Enter the number of hours you spend at home.",
 					"Hours at Home", JOptionPane.QUESTION_MESSAGE);
 			hrsAtHome = Integer.parseInt(strHoursAtHome);
 			if (hrsAtHome < 0 || hrsAtHome > 168)
 			{
 				JOptionPane.showMessageDialog(null, 
-					"The number of hours per week you are home must be between 0 and 168 inclusive",
+					"The number of hours per week must be between 0 and 168",
 					"Hours at Home Error", 
 					JOptionPane.ERROR_MESSAGE);
 			}
@@ -91,21 +77,13 @@ public class PetAdvice
 		return hrsAtHome;
 	}
 /* 
-	AUTHOR: 		R Grant
-	DATE CREATED: 	1/99
-	PURPOSE: 		Recommend and display a pet based on type of dwelling a person 
-					lives in and the number of hours they are at home each day.
-	ARGUMENTS: 		int representing dwelling - code indicating type of dwelling 
-									1 - apartment
-									2 -house
-									3 - dormitory
-					int hrs - minimum hours user spends at home each day
-	RETURN: None
+
+	PURPOSE: Recommend and display a pet based on type of dwelling and the number of hours they are at home.
 */	
 	public static void determinePet(int dwelling, int hrs)
 	{
-		String petType = "No pet"; //temp variable to hold pet recommendation
-		switch (dwelling)     // recommend and display type of pet
+		String petType = "No pet"; //variable for pet type
+		switch (dwelling)     // displays type of pet
 		{
 			case 1:  //dwelling is apartment
 				if (hrs >= 10)
